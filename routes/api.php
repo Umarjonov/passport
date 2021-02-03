@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PassportController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('login', 'PassportController@login');
-Route::post('register', 'PassportController@register');
+Route::post('login',[PassportController::class, 'login']);
+Route::post('register',[PassportController::class, 'register']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'PassportController@details');
+    Route::get('user', [PassportController::class, 'details']);
 
-    Route::resource('products', 'ProductController');
+    Route::resource("products", ProductController::class);
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
